@@ -1,0 +1,59 @@
+webint trig=8; 
+int echo =9;
+int time;
+int distance;
+void setup() {
+// put your setup code here, to run once:
+pinMode(trig,OUTPUT);
+pinMode(echo,INPUT);
+pinMode(7,OUTPUT);
+pinMode(6,OUTPUT);
+pinMode(5,OUTPUT);
+Serial.begin(9600);
+}
+void loop() {
+// put your main code here, to run repeatedly:
+digitalWrite(trig,LOW);
+delay(2);
+digitalWrite(trig,HIGH);
+delay(10);
+digitalWrite(trig,LOW);
+time=pulseIn(echo,HIGH);
+distance=time*0.0341/2;
+Serial.print("distance (in cm): ");
+Serial.println(distance);
+if(distance<10){
+digitalWrite(7,HIGH);
+digitalWrite(5,LOW);
+digitalWrite(6,LOW);
+delay(2);
+}else{
+digitalWrite(7,LOW);
+digitalWrite(5,LOW);
+digitalWrite(6,LOW);
+delay(2);
+}
+if(distance<=20 && distance>10){
+digitalWrite(6,HIGH);
+digitalWrite(5,LOW);
+digitalWrite(7,LOW);
+delay(2);
+}
+else{
+digitalWrite(5,LOW);
+digitalWrite(7,LOW);
+digitalWrite(6,LOW);
+delay(2);
+}
+if(distance>20 && distance<33){
+digitalWrite(5,HIGH);
+digitalWrite(6,LOW);
+digitalWrite(7,LOW);
+delay(2);
+}else{
+digitalWrite(5,LOW);
+digitalWrite(6,LOW);
+digitalWrite(7,LOW);
+delay(2);
+}
+}
